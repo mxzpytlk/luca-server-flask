@@ -1,5 +1,7 @@
 import flask
 
+# Сюда импортировать все роуты приложения
+
 from controllers.routes.auth_route import *
 
 
