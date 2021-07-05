@@ -8,5 +8,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 # Сюда добавлять основные модули приложения
-from db.models_init import *
 from controllers.router import *
+
+if __name__ == "__main__":
+    app.run(debug=True)
