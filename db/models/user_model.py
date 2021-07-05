@@ -11,3 +11,8 @@ class User(db.Model):
 
     def __repr__(self):
         return '<User %r>' % self.id
+
+    @staticmethod
+    def get(name=None):
+        if name:
+            return User.query.filter(User.name == name).first()
