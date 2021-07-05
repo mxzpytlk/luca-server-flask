@@ -46,15 +46,5 @@ def login():
     res = check_auth(name, password)
     if res:
         return res
-    user = User.get(name=name)
-    if user.password != password:
-        res = make_response({
-            'message': 'Incorrect password'
-        })
-        res.status_code = 400
-        return res
-    return {
-        'token': user.id,
-        'id': user.id
-    }
+    return AuthService.login(name, password)
 
