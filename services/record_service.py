@@ -29,3 +29,9 @@ class RecordService:
         db.session.commit()
         return record_id, cur_sector.id
 
+    @staticmethod
+    def get_sectors(user):
+        sectors = []
+        sectors_data = Sector.get(user_id=user.id)
+        return list(map(Sector.from_data, sectors_data))
+

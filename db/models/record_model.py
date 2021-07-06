@@ -12,3 +12,14 @@ class Record(db.Model):
     executionIntervals = db.relationship('Interval', backref='record')
     sector_id = db.Column(db.Integer, db.ForeignKey('sectors.id'))
 
+    @staticmethod
+    def from_data(record_data):
+        return {
+            'id': record_data.id,
+            'text': record_data.text,
+            'executionDate': record_data.executionDate,
+            'executionPlanTime': record_data.executionPlanTime,
+            'executionIntervals': list(map(Interval.from_data, record_data.executionIntervals))
+        }
+
+

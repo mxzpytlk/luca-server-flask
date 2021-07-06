@@ -7,3 +7,10 @@ class Interval(db.Model):
     start = db.Column(db.DateTime, default=datetime.utcnow)
     end = db.Column(db.DateTime)
     record_id = db.Column(db.Integer, db.ForeignKey('records.id'))
+
+    @staticmethod
+    def from_data(interval_data):
+        return {
+            'start': interval_data.start,
+            'end': interval_data.end
+        }
