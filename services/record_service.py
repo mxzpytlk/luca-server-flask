@@ -18,11 +18,11 @@ class RecordService:
                     cur_sector = sector
 
         if not cur_sector:
-            sector_id = Sector.query.count() + 1
+            sector_id = random.randint(0, 100000000)
             cur_sector = Sector(id=sector_id, title=title, user_id=user.id)
             db.session.add(cur_sector)
 
-        record_id = Record.query.count() + 1
+        record_id = random.randint(0, 100000000)
         record = Record(id=record_id,
                         text=record['text'],
                         executionPlanTime=record['executionPlanTime'],
@@ -62,4 +62,10 @@ class RecordService:
     def delete_record(id):
         record = Record.get(id=id)
         db.session.delete(record)
+        db.session.commit()
+
+    @staticmethod
+    def delete_sector(id):
+        sector = Sector.get(id=id)
+        db.session.delete(sector)
         db.session.commit()

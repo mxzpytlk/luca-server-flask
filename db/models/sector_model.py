@@ -17,7 +17,7 @@ class Sector(db.Model):
         if user_id:
             return Sector.query.filter(Sector.user_id == user_id).all()
         if id:
-            return Sector.query.filter(Sector.id == id).all()
+            return Sector.query.filter(Sector.id == id).first()
 
     @staticmethod
     def from_data(sector_data):

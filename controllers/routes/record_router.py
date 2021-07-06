@@ -65,3 +65,18 @@ def delete_record():
     RecordService.delete_record(record_id)
 
     return ''
+
+
+@app.delete(f'{RECORD_PATH}/delete/sector')
+def delete_sector():
+    id = request.headers.get('Authorization')
+    user = User.get(id=id)
+    if not user:
+        res = make_response()
+        res.status_code = 401
+        return res
+    sector_ids = request.args.getlist('removeIds[]')
+    for sector_id in sector_ids:
+        RecordService.delete_sector(sector_id)
+
+    return ''
