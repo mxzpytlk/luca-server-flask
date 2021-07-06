@@ -13,6 +13,11 @@ class User(db.Model):
         return '<User %r>' % self.id
 
     @staticmethod
-    def get(name=None):
+    def get(name=None, id=None):
         if name:
             return User.query.filter(User.name == name).first()
+
+    @staticmethod
+    def get(id=None):
+        if id:
+            return User.query.filter(User.id == id).first()
