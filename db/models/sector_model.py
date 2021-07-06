@@ -11,11 +11,13 @@ class Sector(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
     @staticmethod
-    def get(title=None, user_id=None):
+    def get(title=None, user_id=None, id=None):
         if title:
             return Sector.query.filter(Sector.title == title).all()
         if user_id:
             return Sector.query.filter(Sector.user_id == user_id).all()
+        if id:
+            return Sector.query.filter(Sector.id == id).all()
 
     @staticmethod
     def from_data(sector_data):

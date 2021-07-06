@@ -51,3 +51,17 @@ def update_record():
         RecordService.update_record(json.loads(record), user)
 
     return ''
+
+
+@app.delete(f'{RECORD_PATH}/delete/record')
+def delete_record():
+    id = request.headers.get('Authorization')
+    user = User.get(id=id)
+    if not user:
+        res = make_response()
+        res.status_code = 401
+        return res
+    record_id = request.args.get('id')
+    RecordService.delete_record(record_id)
+
+    return ''

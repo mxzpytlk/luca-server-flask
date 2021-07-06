@@ -57,3 +57,9 @@ class RecordService:
                                      if ('end' in interval and interval['end']) else None,
                                      record_id=record.id)
             db.session.add(interval_data)
+
+    @staticmethod
+    def delete_record(id):
+        record = Record.get(id=id)
+        db.session.delete(record)
+        db.session.commit()
