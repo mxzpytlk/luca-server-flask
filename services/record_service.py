@@ -1,6 +1,9 @@
 from app import db
+from db.models.interval_model import Interval
 from db.models.record_model import Record
 from db.models.sector_model import Sector
+from dateutil import parser
+import random
 
 
 class RecordService:
@@ -31,7 +34,25 @@ class RecordService:
 
     @staticmethod
     def get_sectors(user):
-        sectors = []
         sectors_data = Sector.get(user_id=user.id)
         return list(map(Sector.from_data, sectors_data))
 
+    @staticmethod
+    def update_record(record, user):
+        record_data = Record.get(record['id'])
+        record_data.text = record['text']
+        record_data.executionDate = parser.parse(record['executionDate'])
+        record_data.executionPlanTime = record['executionPlanTime']
+        RecordService.update_intervals(record_data, record['executionIntervals'])
+        db.session.commit()
+
+    @staticmethod
+    def update_intervals(record, intervals):
+        for interval_data in record.executionIntervals:
+            db.session.delete(interval_data)
+        for interval in intervals:
+            interval_data = Interval(id=random.randint(0, 100000000),
+                                     start=parser.parse(interval['start']),
+                                     end=parser.parse(interval['end']) if 'end' in interval else None,
+                                     record_id=record.id)
+            db.session.add(interval_data)

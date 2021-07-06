@@ -13,6 +13,11 @@ class Record(db.Model):
     sector_id = db.Column(db.Integer, db.ForeignKey('sectors.id'))
 
     @staticmethod
+    def get(id=None):
+        if id:
+            return Record.query.filter(Record.id == id).first()
+
+    @staticmethod
     def from_data(record_data):
         return {
             'id': record_data.id,

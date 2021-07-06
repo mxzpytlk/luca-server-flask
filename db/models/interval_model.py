@@ -1,5 +1,6 @@
 from app import db
 from datetime import datetime
+from dateutil import parser
 
 
 class Interval(db.Model):
@@ -14,3 +15,12 @@ class Interval(db.Model):
             'start': interval_data.start,
             'end': interval_data.end
         }
+
+    @staticmethod
+    def from_iso(interval):
+        return {
+            'start': parser.parse(interval['start']),
+            'end': parser.parse(interval['end']) if 'end' in interval else None
+        }
+
+

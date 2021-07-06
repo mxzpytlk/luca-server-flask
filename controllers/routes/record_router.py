@@ -36,3 +36,19 @@ def get_sectors():
     return {
         'sectors': RecordService.get_sectors(user)
     }
+
+
+@app.post(f'{RECORD_PATH}/update/')
+def update_record():
+    id = request.headers.get('Authorization')
+    user = User.get(id=id)
+    if not user:
+        res = make_response()
+        res.status_code = 401
+        return res
+    records = json.loads(request.args.get('records[]'))
+    if isinstance(records, list):
+        pass
+    else:
+        RecordService.update_record(records, user)
+    return ''
