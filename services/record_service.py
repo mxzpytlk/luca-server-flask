@@ -53,6 +53,7 @@ class RecordService:
         for interval in intervals:
             interval_data = Interval(id=random.randint(0, 100000000),
                                      start=parser.parse(interval['start']),
-                                     end=parser.parse(interval['end']) if 'end' in interval else None,
+                                     end=parser.parse(interval['end'])
+                                     if ('end' in interval and interval['end']) else None,
                                      record_id=record.id)
             db.session.add(interval_data)

@@ -46,9 +46,8 @@ def update_record():
         res = make_response()
         res.status_code = 401
         return res
-    records = json.loads(request.args.get('records[]'))
-    if isinstance(records, list):
-        pass
-    else:
-        RecordService.update_record(records, user)
+
+    for record in request.args.getlist('records[]'):
+        RecordService.update_record(json.loads(record), user)
+
     return ''
