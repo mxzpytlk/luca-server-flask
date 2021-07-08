@@ -15,10 +15,8 @@ class User(db.Model):
         return '<User %r>' % self.id
 
     @staticmethod
-    def get(name=None, id=None, password=None):
+    def get(name=None, id=None):
         if name:
             return User.query.filter(User.name == name).first()
         if id:
             return User.query.filter(User.id == id).first()
-        if password:
-            return User.query.filter(User.password == password).first()
