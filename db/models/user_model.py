@@ -20,3 +20,11 @@ class User(db.Model):
             return User.query.filter(User.name == name).first()
         if id:
             return User.query.filter(User.id == id).first()
+
+    @staticmethod
+    def from_data(user):
+        return {
+            'id': user.id,
+            'name': user.name,
+            'is_admin': user.is_admin
+        }

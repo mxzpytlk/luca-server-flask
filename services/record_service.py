@@ -33,8 +33,8 @@ class RecordService:
         return record_id, cur_sector.id
 
     @staticmethod
-    def get_sectors(user):
-        sectors_data = Sector.get(user_id=user.id)
+    def get_sectors(user_id):
+        sectors_data = Sector.get(user_id=user_id)
         return list(map(Sector.from_data, sectors_data))
 
     @staticmethod

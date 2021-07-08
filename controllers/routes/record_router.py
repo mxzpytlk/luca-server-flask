@@ -33,8 +33,10 @@ def get_sectors():
         res = make_response()
         res.status_code = 401
         return res
+    if user.is_admin and request.args.get('userId'):
+        id = request.args.get('userId')
     return {
-        'sectors': RecordService.get_sectors(user)
+        'sectors': RecordService.get_sectors(id)
     }
 
 
@@ -48,7 +50,7 @@ def update_record():
         return res
 
     for record in request.args.getlist('records[]'):
-        RecordService.update_record(json.loads(record), user)
+        RecordService.update_record(json.loads(record))
 
     return ''
 
