@@ -38,7 +38,7 @@ class RecordService:
         return list(map(Sector.from_data, sectors_data))
 
     @staticmethod
-    def update_record(record, user):
+    def update_record(record):
         record_data = Record.get(record['id'])
         record_data.text = record['text']
         record_data.executionDate = parser.parse(record['executionDate'])

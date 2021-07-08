@@ -29,5 +29,6 @@ class AuthService:
             return res
         return {
             'token': user.id,
-            'id': user.id
+            'id': user.id,
+            'isAdmin': user.is_admin
         }
