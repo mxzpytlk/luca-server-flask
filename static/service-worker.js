@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/static/precache-manifest.bf17fd77c34539ee64d5a6eee4f22dc0.js"
+  "/static/precache-manifest.a18b8e1b0cc5b6f5900cf7acf0f4aaca.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "luca"});
