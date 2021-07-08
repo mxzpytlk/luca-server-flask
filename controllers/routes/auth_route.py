@@ -3,6 +3,7 @@ from flask import request, make_response
 
 from app import app
 from services.auth_service import AuthService
+from services.passchanger_service import PassChangerService
 
 AUTH_PATH = '/api/auth'
 
@@ -47,4 +48,17 @@ def login():
     if res:
         return res
     return AuthService.login(name, password)
+
+
+@app.post(f'{AUTH_PATH}/change/pass')
+def change_password():
+
+    old_password = request.args.get('oldPass')
+    new_password = request.args.get('newPass')
+    id = request.headers.get('Authorization')
+
+    res = PassChangerService.check_pass(old_password, id)
+    if res:
+        return res
+    return PassChangerService.change_pass(id, new_password)
 
