@@ -1,3 +1,5 @@
+import random
+
 from flask import make_response
 
 from app import db
@@ -10,7 +12,7 @@ class AuthService:
         is_admin = False
         if name == 'admin':
             is_admin = True
-        id = User.query.count() + 1
+        id = random.randint(0, 100000000)
         user = User(name=name, password=password, id=id, is_admin=is_admin)
         db.session.add(user)
         db.session.commit()

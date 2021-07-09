@@ -61,6 +61,10 @@ class RecordService:
     @staticmethod
     def delete_record(id):
         record = Record.get(id=id)
+        sector_id = record.sector_id
+        sector = Sector.get(id=sector_id)
+        if len(sector.records) == 1:
+            db.session.delete(sector)
         db.session.delete(record)
         db.session.commit()
 

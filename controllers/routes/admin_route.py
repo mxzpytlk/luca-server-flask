@@ -18,3 +18,17 @@ def get_all_users():
     return {
         'users': list(AdminService.get_all_users())
     }
+
+
+@app.delete(f'{ADMIN_PATH}/delete-user')
+def delete_user():
+    id = request.headers.get('Authorization')
+    user = User.get(id=id)
+    if not user.is_admin:
+        res = make_response()
+        res.status_code = 400
+        return res
+    user_id = request.args.get('id')
+    AdminService.delete_user(user_id)
+
+    return user_id
