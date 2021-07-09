@@ -40,8 +40,9 @@ def get_sectors():
     }
 
 
-@app.post(f'{RECORD_PATH}/update/')
+@app.post(f'{RECORD_PATH}/update')
 def update_record():
+    print('HERE')
     id = request.headers.get('Authorization')
     user = User.get(id=id)
     if not user:
